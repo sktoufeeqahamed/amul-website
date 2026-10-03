@@ -1,0 +1,21 @@
+{
+  "name": "amul-kool-rose",
+  "version": "1.0.0",
+  "description": "Amul Kool Rose Interactive 60 FPS Scrollytelling Experience",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "node -e \"console.log('Build complete: static assets ready for Vercel')\""
+  },
+  "keywords": [
+    "amul",
+    "scrollytelling",
+    "canvas",
+    "animation",
+    "interactive",
+    "vercel"
+  ],
+  "author": "Amul Kool Experience Team",
+  "license": "MIT"
+}

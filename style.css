@@ -1,0 +1,710 @@
+/* ==========================================================================
+   Amul Kool Rose - Apple / Awwwards Style Scrollytelling Engine CSS
+   ========================================================================== */
+
+:root {
+  --font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --bg-primary: #fbf9f5;
+  --bg-soft: #f5f3ef;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-hud: rgba(255, 255, 255, 0.90);
+  
+  --color-amul-navy: #1b1c1a;
+  --color-amul-blue: #4059aa;
+  --color-rose-deep: #b90538;
+  --color-rose-primary: #dc2c4f;
+  --color-rose-light: #ffb2b7;
+  --color-rose-pastel: #ffdadb;
+  --color-text-main: #1b1c1a;
+  --color-text-muted: #5b4041;
+  --color-border: rgba(185, 5, 56, 0.15);
+  --color-glow: rgba(220, 44, 79, 0.28);
+
+  --shadow-sm: 0 2px 8px rgba(27, 28, 26, 0.06);
+  --shadow-md: 0 8px 24px rgba(27, 28, 26, 0.1);
+  --shadow-lg: 0 20px 48px rgba(27, 28, 26, 0.14);
+  --shadow-hud: 0 12px 40px rgba(27, 28, 26, 0.16);
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.loading {
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Preloader Screen
+   ========================================================================== */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(circle at center, #fde8ea 0%, #ecd0d2 60%, #e2babc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-content {
+  text-align: center;
+  max-width: 440px;
+  padding: 40px 24px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.brand-crest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.rose-bloom-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-rose-primary), var(--color-rose-deep));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px var(--color-glow);
+  animation: pulseIcon 2.4s infinite ease-in-out;
+}
+
+@keyframes pulseIcon {
+  0%, 100% { transform: scale(1); box-shadow: 0 8px 24px var(--color-glow); }
+  50% { transform: scale(1.08); box-shadow: 0 14px 36px rgba(185, 5, 56, 0.45); }
+}
+
+.amul-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-amul-blue);
+  text-transform: uppercase;
+}
+
+.preloader-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-amul-navy);
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.preloader-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin-bottom: 28px;
+}
+
+.progress-wrap {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(27, 28, 26, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-rose-primary), var(--color-rose-deep));
+  border-radius: var(--radius-full);
+  transition: width 0.15s ease-out;
+}
+
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.preloader-skip {
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+   Buttons (Used in story overlays & preloader)
+   ========================================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-rose-primary), var(--color-rose-deep));
+  color: #fff;
+  box-shadow: 0 4px 14px var(--color-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(185, 5, 56, 0.4);
+}
+
+.btn-secondary {
+  background: rgba(27, 28, 26, 0.08);
+  color: var(--color-amul-navy);
+}
+
+.btn-secondary:hover {
+  background: rgba(27, 28, 26, 0.14);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  color: var(--color-amul-navy);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.btn-sm {
+  font-size: 0.8rem;
+  padding: 6px 14px;
+}
+
+/* ==========================================================================
+   Canvas Scrollytelling Section
+   ========================================================================== */
+.scroll-showcase {
+  position: relative;
+  width: 100%;
+  height: 600vh; /* Smooth generous scroll journey for 210 frames */
+}
+
+.canvas-viewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #fce8eb 0%, #ebd0d2 50%, #deb1b4 100%);
+}
+
+#frameCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 2;
+  user-select: none;
+}
+
+.ambient-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 178, 183, 0.45) 0%, rgba(185, 5, 56, 0) 70%);
+  filter: blur(60px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Hero Top Heading & Subheading (Fades away at 30% scroll)
+   ========================================================================== */
+.hero-header-overlay {
+  position: absolute;
+  top: 6vh;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 15;
+  text-align: center;
+  width: min(92vw, 840px);
+  pointer-events: none;
+  user-select: none;
+  will-change: opacity, transform;
+}
+
+.hero-header-overlay h1 {
+  text-shadow: 0 2px 24px rgba(255, 255, 255, 0.9), 0 1px 4px rgba(27, 28, 26, 0.08);
+}
+
+.hero-header-overlay p {
+  text-shadow: 0 1px 16px rgba(255, 255, 255, 0.85);
+}
+
+/* ==========================================================================
+   Story Chapters Overlays
+   ========================================================================== */
+.story-overlays {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  padding: 0 6vw;
+}
+
+.story-card {
+  position: absolute;
+  max-width: 460px;
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  padding: 32px 36px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(32px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.story-card.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Position cards around the canvas dynamically */
+.story-card.chapter-1 {
+  left: 6vw;
+  top: 34vh;
+}
+
+.story-card.chapter-2 {
+  right: 6vw;
+  top: 25vh;
+}
+
+.story-card.chapter-3 {
+  left: 6vw;
+  top: 28vh;
+}
+
+.story-card.chapter-4 {
+  right: 6vw;
+  top: 25vh;
+}
+
+.story-card .badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--color-rose-deep);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.story-card .title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--color-amul-navy);
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.story-card .description {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+}
+
+.card-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.card-pills .pill {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  background: rgba(185, 5, 56, 0.08);
+  color: var(--color-rose-deep);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(185, 5, 56, 0.18);
+}
+
+.card-ctas {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* ==========================================================================
+   Floating Interactive HUD Dock
+   ========================================================================== */
+.interactive-hud {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-hud);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-hud);
+  width: min(840px, 94vw);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hud-left, .hud-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: rgba(27, 28, 26, 0.05);
+  color: var(--color-amul-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.hud-btn:hover {
+  background: var(--color-rose-deep);
+  color: #fff;
+  transform: scale(1.06);
+}
+
+.hud-text-btn {
+  width: auto;
+  padding: 0 10px;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* Scrubber Timeline */
+.hud-scrubber-container {
+  flex: 1;
+  padding: 10px 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+.scrubber-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(27, 28, 26, 0.09);
+  border-radius: var(--radius-full);
+  position: relative;
+  overflow: visible;
+}
+
+.scrubber-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-rose-primary), var(--color-rose-deep));
+  border-radius: var(--radius-full);
+  transition: width 0.05s linear;
+}
+
+.scrubber-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border: 3px solid var(--color-rose-deep);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: left 0.05s linear, transform 0.15s ease;
+}
+
+.hud-scrubber-container:hover .scrubber-thumb {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.hud-frame-counter {
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.active-frame {
+  color: var(--color-rose-deep);
+  font-variant-numeric: tabular-nums;
+}
+
+.frame-total {
+  color: var(--color-text-muted);
+}
+
+.frame-percent {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.hud-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(27, 28, 26, 0.12);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 84px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+
+.mouse-icon {
+  width: 20px;
+  height: 32px;
+  border: 2px solid var(--color-text-muted);
+  border-radius: 12px;
+  position: relative;
+}
+
+.mouse-icon .wheel {
+  width: 3px;
+  height: 6px;
+  background: var(--color-rose-deep);
+  border-radius: 2px;
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: mouseWheel 1.6s infinite;
+}
+
+@keyframes mouseWheel {
+  0% { transform: translate(-50%, 0); opacity: 1; }
+  100% { transform: translate(-50%, 12px); opacity: 0; }
+}
+
+/* Chapter Navigation Dots (Right Edge) */
+.chapter-dots {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chapter-dots .dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.chapter-dots .dot:hover,
+.chapter-dots .dot.active {
+  background: var(--color-rose-deep);
+  color: #fff;
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px var(--color-glow);
+}
+
+/* ==========================================================================
+   Responsive Adaptations for Scrollytelling
+   ========================================================================== */
+@media (max-width: 992px) {
+  .story-card {
+    max-width: 380px;
+    padding: 24px 28px;
+  }
+
+  .story-card.chapter-1,
+  .story-card.chapter-3 {
+    left: 4vw;
+  }
+
+  .story-card.chapter-2,
+  .story-card.chapter-4 {
+    right: 4vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-header-overlay {
+    top: 3vh;
+    width: 92vw;
+  }
+
+  .story-card {
+    left: 50% !important;
+    right: auto !important;
+    top: 18vh !important;
+    transform: translate(-50%, 20px) !important;
+    width: 90vw;
+    max-width: 90vw;
+    padding: 20px;
+  }
+
+  .story-card.active {
+    transform: translate(-50%, 0) !important;
+  }
+
+  .story-card .title {
+    font-size: 1.6rem;
+  }
+
+  .story-card .description {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+
+  .chapter-dots {
+    display: none;
+  }
+
+  .interactive-hud {
+    bottom: 12px;
+    padding: 6px 12px;
+    gap: 8px;
+  }
+
+  .hud-divider, #fitModeBtn {
+    display: none;
+  }
+
+  .hud-frame-counter .frame-percent {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Fixed Transparent Navigation Bar & Scrollspy
+   ========================================================================== */
+#mainNavbar {
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              backdrop-filter 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#mainNavbar.scrolled {
+  background-color: rgba(251, 249, 245, 0.88) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border-bottom-color: rgba(185, 5, 56, 0.12) !important;
+  box-shadow: 0 4px 20px rgba(27, 28, 26, 0.06);
+}
+
+.nav-item.active {
+  background-color: var(--color-rose-deep) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 10px rgba(185, 5, 56, 0.28);
+}
+
+.mobile-nav-link.active {
+  background-color: var(--color-rose-pastel) !important;
+  color: var(--color-rose-deep) !important;
+  font-weight: 700;
+}
+
+/* Scroll margin offset for fixed navbar */
+#hero-scroll,
+#flavor-profile,
+#nutrition-goodness,
+#pack-sizes,
+#mocktails,
+#reviews,
+#faq {
+  scroll-margin-top: 5.5rem;
+}
+
